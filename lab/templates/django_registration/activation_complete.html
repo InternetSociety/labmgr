@@ -1,0 +1,16 @@
+{% extends "base_site.html" %}
+
+{% block title %}
+    Activation complete | {{ block.super }}
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="content registration-form">
+        <h1>Account activated</h1>
+        <p>Your account has now been activated. You can now <a href="{% url 'login' %}">Log in</a>.</p>
+    </div>
+{% endblock %}

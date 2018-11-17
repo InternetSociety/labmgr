@@ -1,0 +1,20 @@
+.project-diagram-container {
+    background-color: #eeeeee;
+    padding: 20px;
+    overflow: scroll;
+}
+
+.project-diagram {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.project-diagram svg text {
+    dominant-baseline: text-before-edge;
+}
+
+.project-diagram .element {
+    position: absolute;
+    transform-origin: 0 0;
+}

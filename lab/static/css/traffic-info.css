@@ -1,0 +1,26 @@
+table.traffic {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table.traffic td,
+table.traffic th {
+    padding: 3px 5px;
+}
+
+table.traffic colgroup.current {
+    border-left: 1px solid #333;
+}
+
+table.traffic th {
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+table.traffic .address {
+    font-weight: 600;
+}
+
+table.traffic .extra {
+    font-size: 70%;
+}

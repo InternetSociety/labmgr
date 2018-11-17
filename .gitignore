@@ -1,0 +1,49 @@
+### JetBrains template
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/dictionaries
+# Sensitive or high-churn files
+.idea/**/dataSources.local.xml
+# Gradle
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+
+# CMake
+# Mongo Explorer plugin
+# File-based project format
+# IntelliJ
+# mpeltonen/sbt-idea plugin
+# JIRA plugin
+# Cursive Clojure plugin
+# Crashlytics plugin (for Android Studio and IntelliJ)
+# Editor-based Rest Client
+### Python template
+# Byte-compiled / optimized / DLL files
+# C extensions
+# Distribution / packaging
+# Installer logs
+# Translations
+# Django stuff:
+local_settings.py
+db.sqlite3
+
+# pyenv
+.python-version
+
+# Collected static files
+/static
+
+# NodeJS
+/node_modules
+
+# Webpack
+/webpack-stats.json
+/lab/static/bundles/

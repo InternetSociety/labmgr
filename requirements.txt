@@ -1,0 +1,16 @@
+pexpect
+redis
+django>=2.1,<2.2
+django-debug-toolbar
+django-extensions
+django-macaddress
+django-model-utils
+django-nested-admin
+django-redis-cache
+django-redis-sessions
+django-registration
+django-webpack-loader
+django-websocket-redis
+uwsgi-tasks
+psycopg2>=2.7,<2.8 --no-binary psycopg2
+requests

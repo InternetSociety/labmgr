@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="1717ecf6-a03d-4fba-a81e-4f71c9557856" name="gns3" url="http://[2001:9e0:803::10]">
+        <fileTransfer host="[2001:9e0:803::10]" port="22" rootFolder="/home/sander" accessType="SFTP" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,40 @@
+.react-tabs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.react-tabs__tab-panel {
+    overflow: scroll;
+    flex: 1;
+    border-right: 1px solid #aaa;
+}
+
+.react-tabs__tab-list {
+    background-color: #eee;
+    margin: 0 !important;
+    padding: 10px 0 0 10px !important;
+    display: flex;
+}
+
+.tab-status {
+    display: inline-block;
+    border: 1px solid transparent;
+    border-bottom: none;
+    bottom: -1px;
+    position: relative;
+    list-style: none;
+    padding: 6px 12px;
+    margin-left: auto;
+    color: #666;
+}
+
+.pass,
+.tab-status.connected {
+    color: #009900;
+}
+
+.fail,
+.tab-status.disconnected {
+    color: #cc0000;
+}

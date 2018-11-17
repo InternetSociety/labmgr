@@ -1,0 +1,16 @@
+{% extends "base_site.html" %}
+
+{% block title %}
+    Activation failed | {{ block.super }}
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="content registration-form">
+        Your account could not be activated:
+        {{ activation_error }}
+    </div>
+{% endblock %}

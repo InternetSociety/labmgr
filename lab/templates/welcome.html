@@ -1,0 +1,76 @@
+{% extends "base_site.html" %}
+
+{% block header %}
+    {{ block.super }}
+    Welcome
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <h1>Welcome to this training center</h1>
+
+        {% if not user.is_authenticated %}
+            <p>
+                Before you can use this training center you have to <a href="{% url 'login' %}">log in</a> or
+                <a href="{% url 'django_registration_register' %}">create new account</a>.
+            </p>
+        {% else %}
+            {% with exercises=user.exercise_set.all %}
+                {% if exercises %}
+                    <h2>Your lab exercises</h2>
+                    <ul>
+                        {% for exercise in exercises|dictsort:'started' %}
+                            <li>
+                                <b>{{ exercise.name }}</b><br/>
+                                Started: {{ exercise.started }}<br/>
+                                {% if exercise.deadline %}
+                                    Deadline: {{ exercise.deadline }}<br/>
+                                {% endif %}
+                                {% if exercise.is_running %}
+                                    <form style="display: inline-block" method="get"
+                                          action="{% url 'project_dashboard' project_id=exercise.id %}">
+                                        <button type="submit">Open lab dashboard</button>
+                                    </form>
+                                    <form style="display: inline-block" method="post"
+                                          action="{% url 'project_stop' project_id=exercise.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit">Stop lab</button>
+                                    </form>
+                                {% elif exercise.is_active %}
+                                    <i>Currently not running</i><br/>
+                                    <form style="display: inline-block" method="post"
+                                          action="{% url 'project_start' project_id=exercise.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit">Start lab</button>
+                                    </form>
+                                {% else %}
+                                    <i>Deadline has expired</i>
+                                {% endif %}
+                                <br/><br/>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
+            {% if templates %}
+                <h2>Available lab exercises</h2>
+                <ul>
+                    {% for template in templates %}
+                        <li>
+                            <b>{{ template.public_name }}</b><br/>
+                            <form style="display: inline-block" method="post"
+                                  action="{% url 'template_clone' project_id=template.id %}">
+                                {% csrf_token %}
+                                <button type="submit">Start new lab</button>
+                            </form>
+                            <br/><br/>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <p><b>Note:</b> Starting a lab may take a few minutes, please be patient.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

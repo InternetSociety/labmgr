@@ -1,0 +1,16 @@
+{% extends "base_site.html" %}
+
+{% block title %}
+    Logged out | {{ block.super }}
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="content logout">
+        <h1>Logged out</h1>
+        You have been logged out.
+    </div>
+{% endblock %}

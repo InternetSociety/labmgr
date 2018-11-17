@@ -1,0 +1,35 @@
+table.neighbor {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table.neighbor td,
+table.neighbor th {
+    padding: 3px 5px;
+}
+
+table.neighbor colgroup.current {
+    border-left: 1px solid #333;
+}
+
+table.neighbor tr th {
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+table.neighbor tr:first-child th {
+    text-align: center;
+    border: none;
+}
+
+table.neighbor tr:first-child th:first-child {
+    text-align: left;
+}
+
+table.neighbor .address {
+    font-weight: 600;
+}
+
+table.neighbor .extra {
+    font-size: 70%;
+}

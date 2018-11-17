@@ -1,0 +1,48 @@
+{
+  "name": "labmgr",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ISOC Lab Manager",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "css": "^2.2.4",
+    "css-to-react-native": "^2.2.2",
+    "ip-address": "^5.8.9",
+    "js-cookie": "^2.2.0",
+    "lodash.throttle": "^4.1.1",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.23",
+    "prop-types": "^15.6.2",
+    "pubsub-js": "^1.7.0",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-intl": "^2.7.2",
+    "react-redux": "^5.1.0",
+    "react-resize-detector": "^3.2.0",
+    "react-tabs": "^2.3.0",
+    "redux": "^4.0.1",
+    "showdown": "^1.8.7",
+    "sockette": "^2.0.0",
+    "xterm": "^3.8.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "css-loader": "^1.0.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.24.0",
+    "webpack-bundle-tracker": "^0.4.2-beta",
+    "webpack-cli": "^3.1.2"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js --progress --colors --mode production",
+    "watch": "webpack --config webpack.config.js --watch --mode development"
+  },
+  "author": "Sander Steffann <sander@steffann.nl>",
+  "license": "GPL-3.0"
+}

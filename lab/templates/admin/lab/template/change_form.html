@@ -1,0 +1,29 @@
+{% extends "admin/change_form.html" %}
+
+{% block field_sets %}
+    <div style="float: right; margin-left: 50px; margin-bottom: 10px;">
+        {{ drawing }}
+    </div>
+
+    {{ block.super }}
+{% endblock %}
+
+{% block after_related_objects %}
+    {{ block.super }}
+
+    {% if can_add_nodes %}
+        <div class="inline-group">
+            <div class="inline-related tabular">
+                <fieldset class="module">
+                    <table>
+                        <tr class="add-row">
+                            <td>
+                                <a href="{% url 'admin:node_add' object_id=object_id %}">Add work, monitor or IRR node</a>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

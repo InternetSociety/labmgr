@@ -1,0 +1,97 @@
+<style>
+    svg text {
+        dominant-baseline: text-before-edge;
+    }
+</style>
+
+<div style="position: relative;
+        width: {{ scene_width | add:20 }}px;
+        height: {{ scene_height | add:20 }}px;">
+    <div style="position:absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;">
+
+        {% for drawing in drawings %}
+            {% if drawing.svg != '<svg></svg>' %}
+                <div style="position: absolute;
+                        left: {{ drawing.x }}px;
+                        top: {{ drawing.y }}px;
+                        z-index: {{ drawing.z }};
+                        transform: rotate({{ drawing.rotation }}deg);
+                        transform-origin: 0 0;">
+                    {{ drawing.svg | safe }}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <div style="position: absolute; left: 0; top: 0; width: {{ scene_width }}px; height: {{ scene_height }}px;">
+            <svg width="{{ scene_width }}" height="{{ scene_height }}">
+                {% for link in links %}
+                    <line x1="{{ link.x1 | add:link.x1_offset }}" y1="{{ link.y1 | add:link.y1_offset }}"
+                          x2="{{ link.x2 | add:link.x2_offset }}" y2="{{ link.y2 | add:link.y2_offset }}"
+                          style="stroke: rgb(0,0,0); stroke-width: 3"></line>
+                {% endfor %}
+            </svg>
+        </div>
+
+        {% for link in links %}
+            {% if link.label1.text %}
+                <div style="position: absolute;
+                        left: {{ link.label1.x | add:link.x1 }}px;
+                        top: {{ link.label1.y | add:link.y1 }}px;
+                        transform: rotate({{ link.label1.rotation }}deg);
+                        transform-origin: 0 0;
+                        {{ link.label1.style }}">
+                    {{ link.label1.text }}
+                </div>
+            {% endif %}
+
+            {% if link.label2.text %}
+                <div style="position: absolute;
+                        left: {{ link.label2.x | add:link.x2 }}px;
+                        top: {{ link.label2.y | add:link.y2 }}px;
+                        transform: rotate({{ link.label2.rotation }}deg);
+                        transform-origin: 0 0;
+                        {{ link.label2.style }}">
+                    {{ link.label2.text }}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for node in nodes %}
+            {% if node.link %}
+                <a href="{{ node.link }}" target="{{ node.link_target | default:"_self" }}">
+            {% endif %}
+
+            <img style="position: absolute;
+                    {% if node.disabled %}
+                        filter: sepia(100%) saturate(0%) contrast(30%) brightness(150%);
+                    {% elif show_state and node.status != 'started' %}
+                        filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(320deg);
+                    {% endif %}
+                    width: {{ node.width }}px;
+                    height: {{ node.height }}px;
+                    left: {{ node.x }}px;
+                    top: {{ node.y }}px;
+                    z-index: {{ node.z }};"
+                 src="{% url 'symbol' symbol_id=node.symbol %}">
+
+            {% if node.link %}
+                </a>
+            {% endif %}
+
+            <div style="position: absolute;
+                    left: {{ node.label.x | add:node.x }}px;
+                    top: {{ node.label.y | add:node.y }}px;
+                    z-index: {{ node.z | add:10 }};
+                    transform: rotate({{ node.label.rotation }}deg);
+                    transform-origin: 0 0;
+                    {{ node.label.style }}">
+
+                {{ node.label.text }}
+            </div>
+        {% endfor %}
+    </div>
+</div>

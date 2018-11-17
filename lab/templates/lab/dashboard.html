@@ -1,0 +1,25 @@
+{% extends "base_site.html" %}
+{% load render_bundle from webpack_loader %}
+
+{% block title %}
+    Dashboard: {{ exercise.name }} | {{ block.super }}
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+    Dashboard: {{ exercise.name }}
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+
+    {{ exercise|json_script:"exercise-data" }}
+    {{ diagram|json_script:"diagram-data" }}
+{% endblock %}
+
+{% block content %}
+    <div style="flex: 1; display: flex; flex-direction: row; overflow: hidden" id="react"></div>
+
+    {% render_bundle 'vendors' %}
+    {% render_bundle 'dashboard' %}
+{% endblock %}

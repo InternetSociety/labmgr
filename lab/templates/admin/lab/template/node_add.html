@@ -1,0 +1,48 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}">
+{% endblock %}
+
+{% if not is_popup %}
+    {% block breadcrumbs %}
+        <div class="breadcrumbs">
+            <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+            &rsaquo;
+            <a href="{% url 'admin:app_list' app_label="lab" %}">{{ lab_app_name|capfirst }}</a>
+            &rsaquo;
+            <a href="{% url 'admin:lab_template_changelist' %}">{{ template_name_plural|capfirst }}</a>
+            &rsaquo;
+            <a href="{% url 'admin:lab_template_change' object_id=template.id %}">{{ template.name }}</a>
+            &rsaquo;
+            Add node
+        </div>
+    {% endblock %}
+{% endif %}
+
+{% block content %}
+    <form method="post" id="node_form" novalidate>
+        <div style="float: right; margin-left: 50px; margin-bottom: 10px;">
+            {{ drawing }}
+        </div>
+
+        {% csrf_token %}
+
+        {% block field_sets %}
+            {% for fieldset in adminform %}
+                {% include "admin/includes/fieldset.html" %}
+            {% endfor %}
+        {% endblock %}
+
+        <br clear="all">
+
+        <div class="submit-row">
+            <input type="submit" value="Save" class="default" name="_save">
+            {% if show_save_and_add_another %}
+                <input type="submit" value="{% trans 'Save and add another' %}" name="_addanother">
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}

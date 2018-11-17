@@ -1,0 +1,39 @@
+.irr-node {
+    margin: 20px;
+}
+
+.query-response {
+    display: inline-block;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 10px 20px 10px 10px;
+    margin: 10px;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 95%;
+    white-space: pre;
+}
+
+.update-area {
+    display: flex;
+    margin: 0 -5px;
+}
+
+.update-text {
+    flex: 1 0;
+    margin: 5px;
+    padding: 8px;
+    min-height: 150px;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 95%;
+}
+
+.update-response {
+    flex: 1 0;
+    margin: 5px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 10px 20px 10px 10px;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 95%;
+    white-space: pre;
+}

@@ -1,0 +1,280 @@
+# The root, simulating an RIR
+
+*****[ UPDATE ]*****
+mntner:       ROOT-MNT
+descr:        Root Maintainer
+admin-c:      SJMS-MANRS
+auth:         CRYPT-PW nyN51fqqp/enQ
+upd-to:       sander@steffann.nl
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+override:     administrator VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+role:         S.J.M. Steffann
+address:      Tienwoningenweg 46
+address:      7312 DN  Apeldoorn
+address:      The Netherlands
+phone:        +31-6-22660412
+e-mail:       sander@steffann.nl
+nic-hdl:      SJMS-MANRS
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+override:     administrator VerySecret
+*****[ END ]*****
+
+# The student
+
+*****[ UPDATE ]*****
+mntner:       STUDENT-MNT
+descr:        Student Maintainer
+admin-c:      STUDENT-MANRS
+auth:         CRYPT-PW UlENBuAl1d6kc
+upd-to:       student@example.com
+mnt-by:       STUDENT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+override:     administrator VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+role:         Student
+address:      Nowhere
+phone:        +1-703-439-2120
+e-mail:       student@example.com
+nic-hdl:      STUDENT-MANRS
+mnt-by:       STUDENT-MNT
+changed:      student@example.com
+source:       MANRS
+password:     manrs
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+aut-num:      AS64500
+as-name:      STUDENT-AS
+descr:        Student's ASN
+admin-c:      STUDENT-MANRS
+tech-c:       STUDENT-MANRS
+mnt-by:       ROOT-MNT
+mnt-by:       STUDENT-MNT
+Changed:      sander@steffann.nl
+source:       MANRS
+password:     manrs
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+inetnum:      203.0.113.0 - 203.0.113.255
+netname:      Student-IPv4
+descr:        Student's IPv4 space
+status:       ASSIGNED PI
+country:      NL
+admin-c:      STUDENT-MANRS
+tech-c:       STUDENT-MANRS
+mnt-by:       ROOT-MNT
+mnt-by:       STUDENT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     manrs
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+inet6num:     2001:db8:1000::/36
+netname:      Student-IPv6
+descr:        Student's IPv6 space
+status:       ALLOCATED PA
+country:      NL
+admin-c:      STUDENT-MANRS
+tech-c:       STUDENT-MANRS
+mnt-by:       ROOT-MNT
+mnt-by:       STUDENT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     manrs
+*****[ END ]*****
+
+# AS64501
+
+*****[ UPDATE ]*****
+inetnum:      192.0.2.0 - 192.0.2.255
+netname:      AS64501-IPv4
+descr:        AS64501's IPv4 space
+status:       ASSIGNED PI
+country:      NL
+admin-c:      SJMS-MANRS
+tech-c:       SJMS-MANRS
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+inet6num:     2001:db8:1001::/48
+netname:      AS64501-IPv6
+descr:        AS64501's IPv6 space
+status:       ASSIGNED PA
+country:      NL
+admin-c:      SJMS-MANRS
+tech-c:       SJMS-MANRS
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+aut-num:      AS64501
+as-name:      CUSTOMER1-AS
+descr:        Customer 1's ASN
+mp-export:    to AS64500 announce AS64501
+mp-import:    from AS64500 accept ANY
+admin-c:      SJMS-MANRS
+tech-c:       SJMS-MANRS
+mnt-by:       ROOT-MNT
+Changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+route:        192.0.2.0/24
+origin:       AS64501
+descr:        IPv4 announced from AS64501
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+route6:       2001:db8:1001::/48
+origin:       AS64501
+descr:        IPv6 announced from AS64501
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+# AS64502
+
+*****[ UPDATE ]*****
+inetnum:      198.51.100.0 - 198.51.100.255
+netname:      AS64502-IPv4
+descr:        AS64502's IPv4 space
+status:       ASSIGNED PI
+country:      NL
+admin-c:      SJMS-MANRS
+tech-c:       SJMS-MANRS
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+inet6num:     2001:db8:2002::/48
+netname:      AS64502-IPv6
+descr:        AS64502's IPv6 space
+status:       ASSIGNED PI
+country:      NL
+admin-c:      SJMS-MANRS
+tech-c:       SJMS-MANRS
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+aut-num:      AS64502
+as-name:      CUSTOMER2-AS
+descr:        Customer 2's ASN
+mp-export:    to AS64500 announce AS64502
+mp-import:    from AS64500 accept ANY
+admin-c:      SJMS-MANRS
+tech-c:       SJMS-MANRS
+mnt-by:       ROOT-MNT
+Changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+route:        198.51.100.0/24
+origin:       AS64502
+descr:        IPv4 announced from AS64502
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+route6:       2001:db8:2002::/48
+origin:       AS64502
+descr:        IPv6 announced from AS64502
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+# AS64510
+
+*****[ UPDATE ]*****
+aut-num:      AS64510
+as-name:      TRANSIT-AS
+descr:        Transit's ASN
+mp-export:    to AS64500 announce ANY
+mp-import:    from AS64500 accept AS64500:AS-ALL
+admin-c:      SJMS-MANRS
+tech-c:       SJMS-MANRS
+mnt-by:       ROOT-MNT
+Changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+# AS64511
+
+*****[ UPDATE ]*****
+inet6num:     2001:db8:3000::/36
+netname:      AS64511-IPv6
+descr:        AS64511's IPv6 space
+status:       ALLOCATED PA
+country:      NL
+admin-c:      SJMS-MANRS
+tech-c:       SJMS-MANRS
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+aut-num:      AS64511
+as-name:      PEER-AS
+descr:        Peer's ASN
+mp-export:    to AS64500 announce AS64511
+mp-import:    from AS64500 accept AS64500:AS-ALL
+admin-c:      SJMS-MANRS
+tech-c:       SJMS-MANRS
+mnt-by:       ROOT-MNT
+Changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****
+
+*****[ UPDATE ]*****
+route6:       2001:db8:3000::/36
+origin:       AS64511
+descr:        IPv6 announced from AS64511
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     VerySecret
+*****[ END ]*****

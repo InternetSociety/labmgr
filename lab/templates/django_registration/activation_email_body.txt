@@ -1,0 +1,14 @@
+Hello,
+
+A new account for the ISOC Lab Manager has been requested for {{ user.username }}
+with email address {{ user.email }}. If this was you then please confirm by
+clicking on the link below:
+
+{{ scheme }}://{{ site.domain }}/{% url 'django_registration_activate' activation_key=activation_key %}
+
+This link will expire after {{ expiration_days }} days.
+
+If you didn't request the creation of this account then please ignore this email.
+
+Sincerely,
+The ISOC Lab team

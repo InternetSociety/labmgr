@@ -1,0 +1,73 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}">
+{% endblock %}
+
+{% if not is_popup %}
+    {% block breadcrumbs %}
+        <div class="breadcrumbs">
+            <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+            &rsaquo;
+            <a href="{% url 'admin:app_list' app_label="lab" %}">{{ lab_app_name|capfirst }}</a>
+            &rsaquo;
+            {% if template %}
+                <a href="{% url 'admin:lab_template_changelist' %}">{{ template_name_plural|capfirst }}</a>
+                &rsaquo;
+                <a href="{% url 'admin:lab_template_change' object_id=template.id %}">{{ template.name }}</a>
+            {% else %}
+                <a href="{% url 'admin:lab_exercise_changelist' %}">{{ exercise_name_plural|capfirst }}</a>
+            {% endif %}
+            &rsaquo;
+            Add student
+        </div>
+    {% endblock %}
+{% endif %}
+
+{% block content %}
+    <form method="post" id="node_form" novalidate>
+        {% csrf_token %}
+
+        {% block field_sets %}
+            {% for fieldset in adminform %}
+                {% include "admin/includes/fieldset.html" %}
+            {% endfor %}
+        {% endblock %}
+
+        <br clear="all">
+
+        <div class="submit-row">
+            <input type="submit" value="Save" class="default" name="_save">
+            {% if show_save_and_add_another %}
+                <input type="submit" value="{% trans 'Save and add another' %}" name="_addanother">
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+
+    <script>
+        const default_time_limits = {
+            "": "",
+            {% for possible_template in templates %}
+                "{{ possible_template.pk }}": "{{ possible_template.default_time_limit|default:'' }}",
+            {% endfor %}
+        };
+
+        const template = document.getElementById('id_template');
+        const time_limit = document.getElementById('id_time_limit');
+
+        template.dataset.old_value = template.value;
+        template.onchange = function () {
+            const old_default_time_limit = default_time_limits[this.dataset.old_value];
+            if (old_default_time_limit === time_limit.value.trim()) {
+                time_limit.value = default_time_limits[this.value];
+            }
+            this.dataset.old_value = this.value;
+        };
+    </script>
+{% endblock %}

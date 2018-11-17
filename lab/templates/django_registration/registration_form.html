@@ -1,0 +1,22 @@
+{% extends "base_site.html" %}
+
+{% block title %}
+    Register user account | {{ block.super }}
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="content registration-form">
+        <h1>Create a new account</h1>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <table>
+                {{ form }}
+            </table>
+            <div class="submit-button"><button type="submit">Submit</button></div>
+        </form>
+    </div>
+{% endblock %}

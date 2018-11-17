@@ -1,0 +1,34 @@
+*****[ BEGIN UPDATE 1 ]*****
+role:         S.J.M. Steffann
+address:      Tienwoningenweg 46
+address:      7312 DN  Apeldoorn
+address:      The Netherlands
+phone:        +31-6-22660412
+e-mail:       sander@steffann.nl
+nic-hdl:      SJMS-MANRS
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     XXX
+*****[ END UPDATE 1 ]*****
+
+*****[ BEGIN UPDATE 2 ]*****
+role:         S.J.M. Steffannnnn
+address:      Tienwoningenweg 46
+address:      7312 DN  Apeldoorn
+address:      The Netherlands
+phone:        +31-6-22660412
+e-mail:       sander@steffann.nl
+nic-hdl:      SJMS-MANRSSSS
+mnt-by:       ROOT-MNT
+changed:      sander@steffann.nl
+source:       MANRS
+password:     XXX
+*****[ END UPDATE 2 ]*****
+
+*****[ BEGIN QUERY 3 ]*****
+AS64500
+*****[ END QUERY 3 ]*****
+
+*****[ BEGIN UPDATE 4 ]*****
+*****[ END UPDATE 4 ]*****

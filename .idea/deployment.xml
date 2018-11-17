@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" promptOnRemoteOverwrite="CHECK_CONTENT" serverName="gns3" autoUploadExternalChanges="true" compareModeInSync="TIMESTAMP">
+    <serverData>
+      <paths name="gns3">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/labmgr" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/db.sqlite3" />
+            <excludedPath local="true" path="$PROJECT_DIR$/labmgr/local_settings.py" />
+            <excludedPath local="true" path="$PROJECT_DIR$/node_modules" />
+            <excludedPath local="true" path="$PROJECT_DIR$/static" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
