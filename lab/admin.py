@@ -75,8 +75,7 @@ class InlineMonitorNodeAdmin(admin.StackedInline):
 
 class InlineIRRNodeAdmin(admin.StackedInline):
     model = IRRNode
-    fields = ('irr_template', 'maintainer', 'maintainer_password',
-              'default_username', 'default_password', 'instructions')
+    fields = ('irr_template', 'maintainer', 'maintainer_password', 'instructions')
     readonly_fields = ('name', 'instructions')
 
     def has_add_permission(self, request, obj):
