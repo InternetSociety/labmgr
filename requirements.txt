@@ -1,6 +1,6 @@
 pexpect
 redis
-django>=2.1,<2.2
+django>=2.1.5,<2.2
 django-debug-toolbar
 django-extensions
 django-macaddress
