@@ -24,7 +24,7 @@ export function printable_prefix(address, prefix_length) {
     let obj = new Address6(address);
     if (address.startsWith('0000:0000:0000:0000:0000:ffff:')) {
         // IPv4
-        return obj.to4().correctForm() + '/' + prefix_length.toString();
+        return obj.to4().correctForm() + '/' + (prefix_length - 96).toString();
     } else {
         // IPv6
         return obj.correctForm() + '/' + prefix_length.toString();
