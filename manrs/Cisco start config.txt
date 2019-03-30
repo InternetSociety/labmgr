@@ -1,0 +1,187 @@
+as64500#sh startup-config
+Using 3618 out of 262144 bytes
+!
+! Last configuration change at 20:28:39 UTC Sat Nov 10 2018 by manrs
+!
+version 15.6
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname as64500
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$Uljv$EmaAz7nfiISQQaJuLoE24.
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authentication enable default enable
+aaa authorization exec default local
+!
+!
+!
+!
+!
+aaa session-id common
+ethernet lmi ce
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip cef
+ipv6 unicast-routing
+ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+username gns3 privilege 15 secret 5 $1$tNPZ$t.Ajdj5FRfSzahkHym3vo.
+username manrs privilege 15 secret 5 $1$J.n8$U7j5KHZXoT7E8djbcvQ/10
+!
+redundancy
+!
+no cdp log mismatch duplex
+!
+ip tcp synwait-time 5
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ no shutdown
+ description To AS64510 - Transit
+ ip address 192.168.255.255 255.255.255.254
+ no ip redirects
+ ipv6 address 2001:DB8:F000:FFFF::B/127
+ no ipv6 redirects
+!
+interface GigabitEthernet0/1
+ no shutdown
+ description To AS64511 - Peer
+ ip address 203.0.113.250 255.255.255.254
+ no ip redirects
+ ipv6 address 2001:DB8:1000:FFFD::A/127
+ no ipv6 redirects
+!
+interface GigabitEthernet0/2
+ no shutdown
+ description To AS64501 - Customer
+ ip address 203.0.113.252 255.255.255.254
+ no ip redirects
+ ipv6 address 2001:DB8:1000:FFFE::A/127
+ no ipv6 redirects
+!
+interface GigabitEthernet0/3
+ no shutdown
+ description To AS64502 - Customer
+ ip address 203.0.113.254 255.255.255.254
+ no ip redirects
+ ipv6 address 2001:DB8:1000:FFFF::A/127
+ no ipv6 redirects
+!
+router bgp 64500
+ bgp log-neighbor-changes
+ no bgp default ipv4-unicast
+ neighbor 2001:DB8:1000:FFFD::B remote-as 64511
+ neighbor 2001:DB8:1000:FFFD::B description Peer
+ neighbor 2001:DB8:1000:FFFE::B remote-as 64501
+ neighbor 2001:DB8:1000:FFFE::B description Customer
+ neighbor 2001:DB8:1000:FFFF::B remote-as 64502
+ neighbor 2001:DB8:1000:FFFF::B description Customer
+ neighbor 2001:DB8:F000:FFFF::A remote-as 64510
+ neighbor 2001:DB8:F000:FFFF::A description Transit
+ neighbor 192.168.255.254 remote-as 64510
+ neighbor 192.168.255.254 description Transit
+ neighbor 203.0.113.251 remote-as 64511
+ neighbor 203.0.113.251 description Peer
+ neighbor 203.0.113.253 remote-as 64501
+ neighbor 203.0.113.253 description Customer
+ neighbor 203.0.113.255 remote-as 64502
+ neighbor 203.0.113.255 description Customer
+ !
+ address-family ipv4
+  network 203.0.113.0
+  neighbor 192.168.255.254 activate
+  neighbor 203.0.113.251 activate
+  neighbor 203.0.113.253 activate
+  neighbor 203.0.113.255 activate
+ exit-address-family
+ !
+ address-family ipv6
+  network 2001:DB8:1000::/36
+  neighbor 2001:DB8:1000:FFFD::B activate
+  neighbor 2001:DB8:1000:FFFE::B activate
+  neighbor 2001:DB8:1000:FFFF::B activate
+  neighbor 2001:DB8:F000:FFFF::A activate
+ exit-address-family
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 203.0.113.0 255.255.255.0 Null0
+!
+ipv6 route 2001:DB8:1000::/36 Null0
+!
+!
+!
+!
+!
+control-plane
+!
+banner exec ^
+Welcome
+^
+banner incoming ^
+Welcome
+^
+banner login ^
+Log in with username 'manrs' and password 'manrs':^
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ transport input none
+!
+no scheduler allocate
+!
+end

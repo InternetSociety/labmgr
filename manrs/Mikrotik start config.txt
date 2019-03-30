@@ -1,0 +1,41 @@
+/interface bridge
+add name=loopback
+/interface ethernet
+set [ find default-name=ether1 ] comment="To AS64510 - Transit"
+set [ find default-name=ether2 ] comment="To AS64511 - Peer"
+set [ find default-name=ether3 ] comment="To AS64501 - Customer"
+set [ find default-name=ether4 ] comment="To AS64502 - Customer"
+/routing bgp instance
+set default as=64500 redistribute-connected=yes router-id=203.0.113.250
+/ip address
+add address=203.0.113.250 interface=ether2 network=203.0.113.251
+add address=203.0.113.252 interface=ether3 network=203.0.113.253
+add address=203.0.113.254 interface=ether4 network=203.0.113.255
+add address=192.168.255.255 interface=ether1 network=192.168.255.254
+/ip route
+add distance=1 dst-address=203.0.113.0/24 type=blackhole
+/ipv6 address
+add address=2001:db8:f000:ffff::b/127 advertise=no interface=ether1
+add address=2001:db8:1000:fffd::a/127 advertise=no interface=ether2
+add address=2001:db8:1000:fffe::a/127 advertise=no interface=ether3
+add address=2001:db8:1000:ffff::a/127 advertise=no interface=ether4
+/ipv6 route
+add distance=1 dst-address=2001:db8:1000::/36 type=unreachable
+/routing bgp network
+add network=203.0.113.0/24
+add network=2001:db8:1000::/36
+/routing bgp peer
+add comment=Transit name=peer1 remote-address=192.168.255.254 remote-as=64510
+add address-families=ipv6 comment=Transit name=peer2 remote-address=\
+    2001:db8:f000:ffff::a remote-as=64510
+add comment=Peer name=peer3 remote-address=203.0.113.251 remote-as=64511
+add address-families=ipv6 comment=Peer name=peer4 remote-address=\
+    2001:db8:1000:fffd::b remote-as=64511
+add comment=Customer name=peer5 remote-address=203.0.113.253 remote-as=64501
+add address-families=ipv6 comment=Customer name=peer6 remote-address=\
+    2001:db8:1000:fffe::b remote-as=64501
+add comment=Customer name=peer7 remote-address=203.0.113.255 remote-as=64502
+add address-families=ipv6 comment=Customer name=peer8 remote-address=\
+    2001:db8:1000:ffff::b remote-as=64502
+/system identity
+set name=as64500

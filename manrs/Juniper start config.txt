@@ -1,0 +1,130 @@
+version 17.4R1.16;
+system {
+    host-name as64500;
+    root-authentication {
+        encrypted-password "$6$CZ0HkQey$N8uj/Dg4UG6CpbQT7hXAlj8cvRcDuf1y5nCgSI3bFeZJLdqHfq9xmNFC3my/7ZTuR/LK8r5ra7HKxxHA9OqHt."; ## SECRET-DATA
+    }
+    login {
+        message "--- MANRS Lab ---\nLog in with username 'manrs' and password 'manrs!':";
+        user manrs {
+            full-name "MANRS Student";
+            uid 2000;
+            class super-user;
+            authentication {
+                encrypted-password "$6$kuVuMyg6$9dE3cFL0nmSbUDEnVERHSab6fEYCnztmqK4lXyEwtQCb4gXvo00cZiqijehYNkbNXnGt6/8HsElyvD8AJfWLE1"; ## SECRET-DATA
+            }
+        }
+    }
+    syslog {
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+}
+chassis {
+    fpc 0 {
+        pic 0 {
+            number-of-ports 4;
+        }
+        lite-mode;
+    }
+}
+interfaces {
+    ge-0/0/0 {
+        description "To AS64510 - Transit";
+        unit 0 {
+            family inet {
+                address 192.168.255.255/31;
+            }
+            family inet6 {
+                address 2001:db8:f000:ffff::b/127;
+            }
+        }
+    }
+    ge-0/0/1 {
+        description "To AS64511 - Peer";
+        unit 0 {
+            family inet {
+                address 203.0.113.250/31;
+            }
+            family inet6 {
+                address 2001:db8:1000:fffd::a/127;
+            }
+        }
+    }
+    ge-0/0/2 {
+        description "To AS64501 - Customer";
+        unit 0 {
+            family inet {
+                address 203.0.113.252/31;
+            }
+            family inet6 {
+                address 2001:db8:1000:fffe::a/127;
+            }
+        }
+    }
+    ge-0/0/3 {
+        description "To AS64502 - Customer";
+        unit 0 {
+            family inet {
+                address 203.0.113.254/31;
+            }
+            family inet6 {
+                address 2001:db8:1000:ffff::a/127;
+            }
+        }
+    }
+    fxp0 {
+        unit 0;
+    }
+}
+routing-options {
+    rib inet.0 {
+        static {
+            route 203.0.113.0/24 discard;
+        }
+    }
+    rib inet6.0 {
+        static {
+            route 2001:db8:1000::/36 discard;
+        }
+    }
+    autonomous-system 64500;
+}
+protocols {
+    bgp {
+        export accounce;
+        group Transit {
+            peer-as 64510;
+            neighbor 192.168.255.254;
+            neighbor 2001:db8:f000:ffff::a;
+        }
+        group Peer {
+            peer-as 64511;
+            neighbor 203.0.113.251;
+            neighbor 2001:db8:1000:fffd::b;
+        }
+        group Customer1 {
+            peer-as 64501;
+            neighbor 203.0.113.253;
+            neighbor 2001:db8:1000:fffe::b;
+        }
+        group Customer2 {
+            peer-as 64502;
+            neighbor 203.0.113.255;
+            neighbor 2001:db8:1000:ffff::b;
+        }
+    }
+}
+policy-options {
+    policy-statement accounce {
+        then accept;
+    }
+}
