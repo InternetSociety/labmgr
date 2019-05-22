@@ -4,7 +4,7 @@ members:   AS64500
 members:   AS64501
 members:   AS64502
 mnt-by:    STUDENT-MNT
-changed:   sander@steffann.nl
+changed:   manrs@manrs.org
 source:    MANRS
 password:  manrs
 
@@ -23,7 +23,7 @@ admin-c:   STUDENT-MANRS
 tech-c:    STUDENT-MANRS
 mnt-by:    ROOT-MNT
 mnt-by:    STUDENT-MNT
-changed:   sander@steffann.nl
+changed:   manrs@manrs.org
 source:    MANRS
 password:  manrs
 
@@ -31,7 +31,7 @@ route:     203.0.113.0/24
 origin:    AS64500
 descr:     IPv4 announced from Student
 mnt-by:    STUDENT-MNT
-changed:   sander@steffann.nl
+changed:   manrs@manrs.org
 source:    MANRS
 password:  manrs
 
@@ -39,6 +39,6 @@ route6:    2001:db8:1000::/36
 origin:    AS64500
 descr:     IPv6 announced from Student
 mnt-by:    STUDENT-MNT
-changed:   sander@steffann.nl
+changed:   manrs@manrs.org
 source:    MANRS
 password:  manrs
