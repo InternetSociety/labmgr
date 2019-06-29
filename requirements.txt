@@ -1,6 +1,6 @@
 pexpect
 redis
-django>=2.1.9,<2.2
+django>=2.2.2,<2.3
 django-cache-utils
 django-debug-toolbar
 django-extensions
