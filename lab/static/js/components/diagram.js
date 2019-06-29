@@ -44,10 +44,12 @@ class ProjectDiagram extends Component {
 
         let idx = 0;
         for (let link of this.props.diagram.links) {
-            links.push(<line key={idx}
-                             x1={link.x1 + link.x1_offset} y1={link.y1 + link.y1_offset}
-                             x2={link.x2 + link.x2_offset} y2={link.y2 + link.y2_offset}
-                             style={{stroke: "rgb(0,0,0)", strokeWidth: 3}}/>);
+            if (link.label1.text || link.label2.text) {
+                links.push(<line key={idx}
+                                 x1={link.x1 + link.x1_offset} y1={link.y1 + link.y1_offset}
+                                 x2={link.x2 + link.x2_offset} y2={link.y2 + link.y2_offset}
+                                 style={{stroke: "rgb(0,0,0)", strokeWidth: 3}}/>);
+            }
             idx++;
         }
         return <svg className="link element"
@@ -60,7 +62,7 @@ class ProjectDiagram extends Component {
 
         let idx = 0;
         for (let link of this.props.diagram.links) {
-            if (link.label1.text) {
+            if (link.label1.text && !link.label1.text.includes('_')) {
                 let style = {
                     left: link.x1 + link.label1.x,
                     top: link.y1 + link.label1.y,
@@ -73,7 +75,7 @@ class ProjectDiagram extends Component {
                 </div>);
                 idx++;
             }
-            if (link.label2.text) {
+            if (link.label2.text && !link.label2.text.includes('_')) {
                 let style = {
                     left: link.x2 + link.label2.x,
                     top: link.y2 + link.label2.y,
@@ -96,42 +98,44 @@ class ProjectDiagram extends Component {
 
         let idx = 0;
         for (let node of this.props.diagram.nodes) {
-            let style = {
-                width: node.width,
-                height: node.height,
-                left: node.x,
-                top: node.y,
-                zIndex: node.z,
-                cursor: 'pointer',
-            };
-
-            if (this.props.ui.active_tab === node.node_id) {
-                style.filter =
-                    'drop-shadow(-1px -1px 1px white) ' +
-                    'drop-shadow(-1px 1px 1px white) ' +
-                    'drop-shadow(1px -1px 1px white) ' +
-                    'drop-shadow(1px 1px 1px white)' +
-                    'drop-shadow(0 0 1px #369)'
-            }
-
-            let src = '/lab/symbols/' + node.symbol;
-            nodes.push(<img onClick={() => this.props.actions.setActiveTab(node.node_id)} key={idx}
-                            className="node element" style={style} src={src}/>);
-            idx++;
-
-            if (node.label.text) {
+            if (!node.label.text.includes('_')) {
                 let style = {
-                    left: node.x + node.label.x,
-                    top: node.y + node.label.y,
+                    width: node.width,
+                    height: node.height,
+                    left: node.x,
+                    top: node.y,
                     zIndex: node.z,
-                    transform: 'rotate(' + node.label.rotation + 'deg)',
-                    ...ProjectDiagram.convertStyle(node.label.style),
-                };
+                    cursor: 'pointer',
+                    };
 
-                nodes.push(<div key={idx} className="node-label element" style={style}>
-                    {node.label.text}
-                </div>);
+                if (this.props.ui.active_tab === node.node_id) {
+                    style.filter =
+                        'drop-shadow(-1px -1px 1px white) ' +
+                        'drop-shadow(-1px 1px 1px white) ' +
+                        'drop-shadow(1px -1px 1px white) ' +
+                        'drop-shadow(1px 1px 1px white)' +
+                        'drop-shadow(0 0 1px #369)'
+                }
+
+                let src = '/lab/symbols/' + node.symbol;
+                nodes.push(<img onClick={() => this.props.actions.setActiveTab(node.node_id)} key={idx}
+                                className="node element" style={style} src={src}/>);
                 idx++;
+
+                if (node.label.text) {
+                    let style = {
+                        left: node.x + node.label.x,
+                        top: node.y + node.label.y,
+                        zIndex: node.z,
+                        transform: 'rotate(' + node.label.rotation + 'deg)',
+                        ...ProjectDiagram.convertStyle(node.label.style),
+                    };
+
+                    nodes.push(<div key={idx} className="node-label element" style={style}>
+                        {node.label.text}
+                    </div>);
+                    idx++;
+                }
             }
         }
 

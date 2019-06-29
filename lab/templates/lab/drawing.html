@@ -29,15 +29,17 @@
         <div style="position: absolute; left: 0; top: 0; width: {{ scene_width }}px; height: {{ scene_height }}px;">
             <svg width="{{ scene_width }}" height="{{ scene_height }}">
                 {% for link in links %}
-                    <line x1="{{ link.x1 | add:link.x1_offset }}" y1="{{ link.y1 | add:link.y1_offset }}"
-                          x2="{{ link.x2 | add:link.x2_offset }}" y2="{{ link.y2 | add:link.y2_offset }}"
-                          style="stroke: rgb(0,0,0); stroke-width: 3"></line>
+                    {% if link.label1.text or link.label2.text %}
+                        <line x1="{{ link.x1 | add:link.x1_offset }}" y1="{{ link.y1 | add:link.y1_offset }}"
+                              x2="{{ link.x2 | add:link.x2_offset }}" y2="{{ link.y2 | add:link.y2_offset }}"
+                              style="stroke: rgb(0,0,0); stroke-width: 3"></line>
+                    {% endif %}
                 {% endfor %}
             </svg>
         </div>
 
         {% for link in links %}
-            {% if link.label1.text %}
+            {% if link.label1.text and not '_' in link.label1.text %}
                 <div style="position: absolute;
                         left: {{ link.label1.x | add:link.x1 }}px;
                         top: {{ link.label1.y | add:link.y1 }}px;
@@ -48,7 +50,7 @@
                 </div>
             {% endif %}
 
-            {% if link.label2.text %}
+            {% if link.label2.text and not '_' in link.label2.text %}
                 <div style="position: absolute;
                         left: {{ link.label2.x | add:link.x2 }}px;
                         top: {{ link.label2.y | add:link.y2 }}px;
@@ -61,37 +63,39 @@
         {% endfor %}
 
         {% for node in nodes %}
-            {% if node.link %}
-                <a href="{{ node.link }}" target="{{ node.link_target | default:"_self" }}">
+            {% if not '_' in node.label.text %}
+                {% if node.link %}
+                    <a href="{{ node.link }}" target="{{ node.link_target | default:"_self" }}">
+                {% endif %}
+
+                <img style="position: absolute;
+                        {% if node.disabled %}
+                            filter: sepia(100%) saturate(0%) contrast(30%) brightness(150%);
+                        {% elif show_state and node.status != 'started' %}
+                            filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(320deg);
+                        {% endif %}
+                        width: {{ node.width }}px;
+                        height: {{ node.height }}px;
+                        left: {{ node.x }}px;
+                        top: {{ node.y }}px;
+                        z-index: {{ node.z }};"
+                     src="{% url 'symbol' symbol_id=node.symbol %}">
+
+                {% if node.link %}
+                    </a>
+                {% endif %}
+
+                <div style="position: absolute;
+                        left: {{ node.label.x | add:node.x }}px;
+                        top: {{ node.label.y | add:node.y }}px;
+                        z-index: {{ node.z | add:10 }};
+                        transform: rotate({{ node.label.rotation }}deg);
+                        transform-origin: 0 0;
+                        {{ node.label.style }}">
+
+                    {{ node.label.text }}
+                </div>
             {% endif %}
-
-            <img style="position: absolute;
-                    {% if node.disabled %}
-                        filter: sepia(100%) saturate(0%) contrast(30%) brightness(150%);
-                    {% elif show_state and node.status != 'started' %}
-                        filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(320deg);
-                    {% endif %}
-                    width: {{ node.width }}px;
-                    height: {{ node.height }}px;
-                    left: {{ node.x }}px;
-                    top: {{ node.y }}px;
-                    z-index: {{ node.z }};"
-                 src="{% url 'symbol' symbol_id=node.symbol %}">
-
-            {% if node.link %}
-                </a>
-            {% endif %}
-
-            <div style="position: absolute;
-                    left: {{ node.label.x | add:node.x }}px;
-                    top: {{ node.label.y | add:node.y }}px;
-                    z-index: {{ node.z | add:10 }};
-                    transform: rotate({{ node.label.rotation }}deg);
-                    transform-origin: 0 0;
-                    {{ node.label.style }}">
-
-                {{ node.label.text }}
-            </div>
         {% endfor %}
     </div>
 </div>
