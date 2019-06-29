@@ -1,3 +1,8 @@
 .work-node {
     margin: 20px;
 }
+
+.xterm-helpers {
+    top: auto !important;
+    bottom: 0 !important;
+}

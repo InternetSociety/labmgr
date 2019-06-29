@@ -3,7 +3,7 @@ import PubSub from 'pubsub-js'
 import React, {Component} from "react";
 import showdown from "showdown";
 import {Terminal} from 'xterm';
-import 'xterm/dist/xterm.css';
+import 'xterm/src/xterm.css';
 import '../../css/work-node.css';
 import Cookie from 'js-cookie';
 
