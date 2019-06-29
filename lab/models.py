@@ -95,12 +95,11 @@ class Template(Project):
             server_nodes = get_gns3_nodes(exercise.gns3_id)
             for template_node in TemplateNode.objects.select_subclasses().filter(project=self):
                 for server_node in server_nodes:
-                    # This works up to GNS3 Server 2.1.12
-                    if server_node['properties']['mac_address'] == template_node.mac_address:
+                    if server_node.get('properties', {}).get('mac_address') == template_node.mac_address:
                         break
 
                     # GNS3 Server 2.1.13 randomizes MAC addresses
-                    if server_node['name'] == template_node.name:
+                    if server_node.get('name') == template_node.name:
                         break
                 else:
                     raise RuntimeError(_("Node {node.name} ({node.mac_address}) not found in cloned project")
