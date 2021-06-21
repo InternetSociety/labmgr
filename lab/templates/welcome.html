@@ -11,8 +11,10 @@
 
         {% if not user.is_authenticated %}
             <p>
-                Before you can use this training center you have to <a href="{% url 'login' %}">log in</a> or
-                <a href="{% url 'django_registration_register' %}">create new account</a>.
+                Before you can use this training center you have to <a href="{% url 'login' %}">log in</a>
+                {% if registration_open %}
+                    or <a href="{% url 'django_registration_register' %}">create new account</a>.
+                {% endif %}
             </p>
         {% else %}
             {% with exercises=user.exercise_set.all %}

@@ -44,7 +44,9 @@
                     <a href="{% url 'password_change' %}">Change password</a> |
                     <a href="{% url 'logout' %}">Log out</a>
                 {% else %}
-                    <a href="{% url 'django_registration_register' %}">Create new account</a> |
+                    {% if registration_open %}
+                        <a href="{% url 'django_registration_register' %}">Create new account</a> |
+                    {% endif %}
                     <a href="{% url 'login' %}">Log in</a>
                 {% endif %}
             {% endblock %}
