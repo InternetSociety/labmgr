@@ -11,7 +11,7 @@
     "ip-address": "^5.8.9",
     "js-cookie": "^2.2.0",
     "lodash.throttle": "^4.1.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "moment-timezone": "^0.5.23",
     "prop-types": "^15.6.2",
     "pubsub-js": "^1.7.0",
